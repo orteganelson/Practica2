@@ -7,6 +7,7 @@ package ups.edu.ec.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -87,6 +88,56 @@ public class Usuario {
         return listaTelefonos;
     }
     
+    public void agregarTelefono(Telefono telefono){
+        this.listaTelefonos.add(telefono);
+    }
     
+    public Telefono buscarTelefono(Telefono tlfBuscar){
+        return this.listaTelefonos.stream().filter(t -> t.getNumero().equals(tlfBuscar.getNumero())).findFirst().get();
+    }
     
+    public void actualizarTelefono(Telefono tlfNuevo){
+        var tlfActualizar = listaTelefonos.stream().filter(t -> t.getCodigo() == tlfNuevo.getCodigo()).findFirst().get();
+        int index = listaTelefonos.indexOf(tlfActualizar);
+        listaTelefonos.set(index, tlfNuevo);
+    }
+    
+    public void eliminarTelefono(int codigo){
+        var tlfEliminar = listaTelefonos.stream().filter(telefono -> telefono.getCodigo() == codigo).findFirst().get();
+        listaTelefonos.remove(tlfEliminar);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.apellido);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.apellido, other.apellido)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", cedula=" + cedula +
+                ", nombre=" + nombre + ", apellido=" + apellido +
+                ", correo=" + correo + ", clave=" + clave +
+                ", listaTelefonos=" + listaTelefonos + '}';
+    }
+                     
 }
