@@ -5,10 +5,90 @@
  */
 package ups.edu.ec.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author Usuario
  */
 public class Telefono {
+    private int codigo;
+    private String tipo;
+    private String numero;
+    private String operadora;
+    
+    
+    public Telefono(){                
+    }
+
+    public Telefono(int codigo, String tipo, String numero, String operadora) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+        this.numero = numero;
+        this.operadora = operadora;
+    }        
+    
+    public Telefono(String numero) {
+        this.numero = numero;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getOperadora() {
+        return operadora;
+    }
+
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Telefono other = (Telefono) obj;
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
     
 }
