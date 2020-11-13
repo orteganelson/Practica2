@@ -48,5 +48,5 @@ public abstract class Controlador<L> {
         return listaGenerica;
     }
 
-    public abstract int cargarCodigo();
+    public abstract int actualizar();
 }

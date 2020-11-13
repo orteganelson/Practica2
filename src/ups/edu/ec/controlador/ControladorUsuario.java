@@ -19,7 +19,7 @@ public class ControladorUsuario extends Controlador{
     }
     
     @Override
-    public int cargarCodigo() {
+    public int actualizar() {
         if (findAll().size() > 0) {
             return findAll().size() + 1;
         } else {
@@ -37,6 +37,30 @@ public class ControladorUsuario extends Controlador{
 
         }
         return null;
+    }
+    
+    public Usuario comprobarMayusculas(Usuario usuario) {
+        String[] nombres = usuario.getNombre().split(" ");
+        String[] apellidos = usuario.getApellido().split(" ");
+        
+        String nombreMayusculas = "";
+        for (String nombre : nombres) {
+            nombreMayusculas += String.valueOf(Character.toUpperCase(nombre.charAt(0))); 
+            nombreMayusculas += nombre.substring(1,nombre.length()).toLowerCase();
+            nombreMayusculas += " ";
+        }
+
+        String apellidoMayusculas = "";
+        for (String apellido : apellidos) {
+            apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0))); 
+            apellidoMayusculas += apellido.substring(1,apellido.length()).toLowerCase();
+            apellidoMayusculas += " ";
+        }
+        
+        usuario.setNombre(nombreMayusculas.trim());
+        usuario.setApellido(apellidoMayusculas.trim());
+        
+        return usuario;
     }
 
     public Usuario readCedula(Usuario usuarioBuscar) {

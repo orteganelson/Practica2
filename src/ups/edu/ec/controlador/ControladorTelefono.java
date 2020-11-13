@@ -18,7 +18,7 @@ public class ControladorTelefono extends Controlador{
     }
     
     @Override
-    public int cargarCodigo() {
+    public int actualizar() {
         var copiaListaTelefonos = (List<Telefono>) List.copyOf(findAll());
         if (copiaListaTelefonos.isEmpty()) {
             return 1;

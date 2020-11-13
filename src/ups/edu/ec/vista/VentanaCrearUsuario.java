@@ -12,19 +12,16 @@ import ups.edu.ec.modelo.Usuario;
  *
  * @author Usuario
  */
-public class VentanaUsuario extends javax.swing.JInternalFrame {
+public class VentanaCrearUsuario extends javax.swing.JInternalFrame {
     
     private ControladorUsuario controladorUsuario;
-    private Usuario usuario;
-    
     /**
-     * Creates new form VentanaUsuario
-     * @param controladorUsuario
+     * Creates new form VentanaRegistrarUsuario
      */
-    public VentanaUsuario(ControladorUsuario controladorUsuario) {
-        initComponents();
+    public VentanaCrearUsuario(ControladorUsuario controladorUsuario) {        
+        initComponents();        
         this.controladorUsuario = controladorUsuario;
-    }
+    }        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,19 +38,20 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JFormattedTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtCedula = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
-        btnActualizar = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        txtClave = new javax.swing.JPasswordField();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -67,28 +65,32 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Cédula:");
 
-        jLabel2.setText("Apellido:");
+        jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Cédula:");
+        jLabel3.setText("Apellido:");
 
         jLabel4.setText("Correo:");
 
         jLabel5.setText("Contraseña:");
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        try {
+            txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                txtApellidoActionPerformed(evt);
             }
         });
 
-        txtCedula.setEditable(false);
-
-        btnActualizar.setText("Cambiar Datos");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnCrearActionPerformed(evt);
             }
         });
 
@@ -106,44 +108,43 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(62, 62, 62)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(txtCedula)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                             .addComponent(txtNombre)
+                            .addComponent(txtApellido)
                             .addComponent(txtCorreo)
-                            .addComponent(txtClave)))
+                            .addComponent(txtClave))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btnActualizar)))
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnLimpiar)
-                .addGap(18, 18, 18))
+                        .addContainerGap(170, Short.MAX_VALUE)
+                        .addComponent(btnCrear)
+                        .addGap(90, 90, 90)
+                        .addComponent(btnLimpiar)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -153,8 +154,10 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnActualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(btnCrear)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnLimpiar))
         );
 
@@ -162,10 +165,7 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,52 +178,52 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String correo = txtCorreo.getText();
-        String clave = txtClave.getText();
-
-        if (nombre.isBlank() || apellido.isBlank() || correo.isBlank() || clave.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Por favor llene todas las casillas");
-        } else {
-            var usuarioNuevo = controladorUsuario.comprobarMayusculas(new Usuario(usuario.getId(), 
-                    txtCedula.getText(), nombre, apellido, correo, clave, usuario.getListaTelefonos()));
-            
-            controladorUsuario.update(usuario, usuarioNuevo);
-            this.usuario = usuarioNuevo;
-            llenarDatos();
-            
-            JOptionPane.showMessageDialog(this, "Datos Actualizados");
-        }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        llenarDatos();
+        limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        String cedula = (String) txtCedula.getValue();
+        String nombre = txtNombre.getText().trim();
+        String apellido = txtApellido.getText().trim();
+        String correo = txtCorreo.getText();
+        String clave = String.valueOf(txtClave.getPassword());
+
+        if (cedula.length() != 10 || nombre.isBlank() || apellido.isBlank() || correo.isBlank() || clave.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Por favor llene todos los campos correctamente");
+        } else {
+            var usuario = controladorUsuario.comprobarMayusculas(new Usuario(controladorUsuario.actualizar(),
+                    (String) txtCedula.getValue(),
+                    txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(),
+                    String.valueOf(txtClave.getPassword())));
+            controladorUsuario.create(usuario);
+            JOptionPane.showMessageDialog(this, "Se ha registrado el usuario");
+            this.hide();
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        limpiar();
+    }//GEN-LAST:event_formInternalFrameClosed
+
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-       llenarDatos();
+        limpiar();
     }//GEN-LAST:event_formInternalFrameActivated
     
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void limpiar() {
+        txtCedula.setValue("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCorreo.setText("");
+        txtClave.setText("");
     }
-
-    public void llenarDatos() {
-        txtNombre.setText(usuario.getNombre());
-        txtApellido.setText(usuario.getApellido());
-        txtCedula.setText(usuario.getCedula());
-        txtCorreo.setText(usuario.getCorreo());
-        txtClave.setText(usuario.getClave());
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -232,8 +232,8 @@ public class VentanaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtClave;
+    private javax.swing.JFormattedTextField txtCedula;
+    private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

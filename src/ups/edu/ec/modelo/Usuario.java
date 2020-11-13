@@ -22,16 +22,45 @@ public class Usuario {
     private String clave;
     private List<Telefono> listaTelefonos;
 
-    public Usuario(int id, String cedula, String nombre, String apellido, String correo, String clave) {
+    public Usuario(int id, String cedula, String nombre,
+            String apellido, String correo, String clave) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.clave = clave;
-        listaTelefonos = new ArrayList<>();        
+                
+        listaTelefonos = new ArrayList<>();
+    }
+
+    public Usuario(String cedula, String nombre, String apellido,
+            String correo, String clave,List<Telefono> listaTelefonos) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.clave = clave;
+        this.listaTelefonos = listaTelefonos;
+    }
+
+    public Usuario(int id, String cedula, String nombre, String apellido,
+            String correo, String clave, List<Telefono> listaTelefonos) {
+        this.id = id;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.clave = clave;
+        this.listaTelefonos = listaTelefonos;
     }
     
+    
+
+    public Usuario(String apellido) {
+        this.apellido = apellido;
+    }
+
     public Usuario() {
         
     }

@@ -19,12 +19,59 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private ControladorUsuario controladorUsuario;
     private ControladorTelefono controladorTelefono;
+    private VentanaCrearUsuario ventanaRegistrarUsuario;
+    private VentanaIniciarSesion ventanaIniciarSesion;
+    private VentanaRegistrarTelefono ventanaRegistrarTelefono;
+    private VentanaTelefono ventanaTelefono;
+    private VentanaUsuario ventanaUsuario;
     
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        controladorUsuario = new ControladorUsuario();
+        controladorTelefono = new ControladorTelefono();
+
+        ventanaTelefono = new VentanaTelefono(controladorUsuario, controladorTelefono);
+        ventanaUsuario = new VentanaUsuario(controladorUsuario);
+        ventanaRegistrarUsuario = new VentanaCrearUsuario(controladorUsuario);
+        ventanaIniciarSesion = new VentanaIniciarSesion(controladorUsuario, this,ventanaTelefono, ventanaUsuario);
+        ventanaRegistrarTelefono = new VentanaRegistrarTelefono(controladorUsuario,controladorTelefono);
+        
+
+        jDesktopPane1.add(ventanaRegistrarUsuario);
+        jDesktopPane1.add(ventanaIniciarSesion);
+        jDesktopPane1.add(ventanaRegistrarTelefono);
+        jDesktopPane1.add(ventanaTelefono);
+        jDesktopPane1.add(ventanaUsuario);
+
+        this.setExtendedState(VentanaPrincipal.MAXIMIZED_BOTH);
+    }
+    
+    public JMenu getMenuGestion() {
+        return jMenu2;
+    }
+
+    public JMenuItem getMenuItemCerrarSesion() {
+        return menuItemCerrarSesion;
+    }
+
+    public JMenuItem getMenuItemCrearUsuario() {
+        return menuItemCrearUsuario;
+    }
+
+    public JMenuItem getMenuItemIniciarSesion() {
+        return menuItemIniciarSesion;
+    }
+
+    public void cerrarVentanas() {
+        ventanaRegistrarUsuario.setVisible(false);
+        ventanaIniciarSesion.setVisible(false);
+        ventanaRegistrarTelefono.setVisible(false);
+        ventanaTelefono.setVisible(false);
+        ventanaUsuario.setVisible(false);
+
     }
 
     /**
@@ -45,8 +92,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemTelefono = new javax.swing.JMenuItem();
         menuItemExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuItemGestionUsuario = new javax.swing.JMenuItem();
+        menuItemGestionTelefonos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,25 +101,45 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
         jMenu.setText("Menú");
 
         menuItemCrearUsuario.setText("Crear Usuario");
+        menuItemCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCrearUsuarioActionPerformed(evt);
+            }
+        });
         jMenu.add(menuItemCrearUsuario);
 
         menuItemIniciarSesion.setText("Iniciar Sesión");
+        menuItemIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemIniciarSesionActionPerformed(evt);
+            }
+        });
         jMenu.add(menuItemIniciarSesion);
 
         menuItemCerrarSesion.setText("Cerrar Sesión");
+        menuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCerrarSesionActionPerformed(evt);
+            }
+        });
         jMenu.add(menuItemCerrarSesion);
 
         menuItemTelefono.setText("Teléfonos");
+        menuItemTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemTelefonoActionPerformed(evt);
+            }
+        });
         jMenu.add(menuItemTelefono);
 
         menuItemExit.setText("Salir");
@@ -87,11 +154,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Gestión");
 
-        jMenuItem6.setText("Usuario");
-        jMenu2.add(jMenuItem6);
+        menuItemGestionUsuario.setText("Usuario");
+        menuItemGestionUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGestionUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuItemGestionUsuario);
 
-        jMenuItem7.setText("Teléfonos");
-        jMenu2.add(jMenuItem7);
+        menuItemGestionTelefonos.setText("Teléfonos");
+        menuItemGestionTelefonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGestionTelefonosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuItemGestionTelefonos);
 
         menuBar.add(jMenu2);
 
@@ -105,15 +182,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
-        // TODO add your handling code here:
+       System.exit(0);
     }//GEN-LAST:event_menuItemExitActionPerformed
+
+    private void menuItemCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCrearUsuarioActionPerformed
+        cerrarVentanas();
+        ventanaRegistrarUsuario.setVisible(true);
+    }//GEN-LAST:event_menuItemCrearUsuarioActionPerformed
+
+    private void menuItemIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIniciarSesionActionPerformed
+        cerrarVentanas();
+        ventanaIniciarSesion.setVisible(true);
+    }//GEN-LAST:event_menuItemIniciarSesionActionPerformed
+
+    private void menuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarSesionActionPerformed
+       cerrarVentanas();
+        jMenu2.setEnabled(false);
+        menuItemCerrarSesion.setEnabled(false);
+        menuItemCrearUsuario.setEnabled(true);
+        menuItemIniciarSesion.setEnabled(true);
+    }//GEN-LAST:event_menuItemCerrarSesionActionPerformed
+
+    private void menuItemTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTelefonoActionPerformed
+        cerrarVentanas();
+        ventanaRegistrarTelefono.setVisible(true);
+    }//GEN-LAST:event_menuItemTelefonoActionPerformed
+
+    private void menuItemGestionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionUsuarioActionPerformed
+        cerrarVentanas();
+        ventanaUsuario.setVisible(true);
+    }//GEN-LAST:event_menuItemGestionUsuarioActionPerformed
+
+    private void menuItemGestionTelefonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionTelefonosActionPerformed
+        cerrarVentanas();
+        ventanaTelefono.setVisible(true);
+    }//GEN-LAST:event_menuItemGestionTelefonosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,12 +264,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemCerrarSesion;
     private javax.swing.JMenuItem menuItemCrearUsuario;
     private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemGestionTelefonos;
+    private javax.swing.JMenuItem menuItemGestionUsuario;
     private javax.swing.JMenuItem menuItemIniciarSesion;
     private javax.swing.JMenuItem menuItemTelefono;
     // End of variables declaration//GEN-END:variables
