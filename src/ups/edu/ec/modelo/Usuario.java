@@ -29,8 +29,7 @@ public class Usuario {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.clave = clave;
-                
+        this.clave = clave;                
         listaTelefonos = new ArrayList<>();
     }
 
