@@ -5,12 +5,21 @@
  */
 package ups.edu.ec.vista;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import ups.edu.ec.controlador.ControladorTelefono;
+import ups.edu.ec.controlador.ControladorUsuario;
+
 /**
  *
  * @author Usuario
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+
+    private ControladorUsuario controladorUsuario;
+    private ControladorTelefono controladorTelefono;
+    
     /**
      * Creates new form VentanaPrincipal
      */
@@ -27,21 +36,84 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        menuBar = new javax.swing.JMenuBar();
+        jMenu = new javax.swing.JMenu();
+        menuItemCrearUsuario = new javax.swing.JMenuItem();
+        menuItemIniciarSesion = new javax.swing.JMenuItem();
+        menuItemCerrarSesion = new javax.swing.JMenuItem();
+        menuItemTelefono = new javax.swing.JMenuItem();
+        menuItemExit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+
+        jMenu.setText("Menú");
+
+        menuItemCrearUsuario.setText("Crear Usuario");
+        jMenu.add(menuItemCrearUsuario);
+
+        menuItemIniciarSesion.setText("Iniciar Sesión");
+        jMenu.add(menuItemIniciarSesion);
+
+        menuItemCerrarSesion.setText("Cerrar Sesión");
+        jMenu.add(menuItemCerrarSesion);
+
+        menuItemTelefono.setText("Teléfonos");
+        jMenu.add(menuItemTelefono);
+
+        menuItemExit.setText("Salir");
+        menuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemExitActionPerformed(evt);
+            }
+        });
+        jMenu.add(menuItemExit);
+
+        menuBar.add(jMenu);
+
+        jMenu2.setText("Gestión");
+
+        jMenuItem6.setText("Usuario");
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Teléfonos");
+        jMenu2.add(jMenuItem7);
+
+        menuBar.add(jMenu2);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +151,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuItemCerrarSesion;
+    private javax.swing.JMenuItem menuItemCrearUsuario;
+    private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemIniciarSesion;
+    private javax.swing.JMenuItem menuItemTelefono;
     // End of variables declaration//GEN-END:variables
 }
