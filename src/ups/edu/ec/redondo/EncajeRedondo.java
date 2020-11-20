@@ -9,10 +9,10 @@ package ups.edu.ec.redondo;
  *
  * @author Usuario
  */
-public class encaja {
+public class EncajeRedondo {
     private double radio;
 
-    public encaja(double radio) {
+    public EncajeRedondo(double radio) {
         this.radio = radio;
     }
 
