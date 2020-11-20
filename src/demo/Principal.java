@@ -8,7 +8,7 @@ package demo;
 import ups.edu.ec.cuadrado.PiezaCuadrada;
 import ups.edu.ec.redondo.PiezaRedonda;
 import ups.edu.ec.adaptador.Adaptador;
-import ups.edu.ec.redondo.encaja;
+import ups.edu.ec.redondo.EncajeRedondo;
 
 /**
  *
@@ -17,8 +17,8 @@ import ups.edu.ec.redondo.encaja;
 public class Principal {
 
     public static void main(String[] args) {
-        // pieza redonda en agujero redondo encaja
-        encaja hole = new encaja(5);
+        // pieza redonda en agujero redondo EncajeRedondo
+        EncajeRedondo hole = new EncajeRedondo(5);
         PiezaRedonda rpeg = new PiezaRedonda(5);
         if (hole.encajar(rpeg)) {
             System.out.println("La pieza redonda de radio 5 encaja en el agujero redondo de radio 5.");
