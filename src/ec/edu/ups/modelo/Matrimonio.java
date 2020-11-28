@@ -25,7 +25,9 @@ public class Matrimonio{
     public Matrimonio() {
     }
 
-    public Matrimonio(int codigo, Date fecha, String lugar, Persona contrayente1, Persona contrayente2, Persona testigo1, Persona testigo2, Persona autoridad) {
+    public Matrimonio(int codigo, Date fecha, String lugar, 
+            Persona contrayente1, Persona contrayente2, Persona testigo1,
+            Persona testigo2, Persona autoridad) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.lugar = lugar;

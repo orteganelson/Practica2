@@ -22,7 +22,9 @@ public class Persona {
     private String tipo;
     private String estadoCivil;
     
-    public Persona(String nombre, String apellido, String cedula, String direccion, String genero, Date fechaNacimiento, String tipo, String estadoCivil) {
+    public Persona(String nombre, String apellido, String cedula,
+            String direccion, String genero, Date fechaNacimiento,
+            String tipo, String estadoCivil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;

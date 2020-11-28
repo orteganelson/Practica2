@@ -71,18 +71,18 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
-        txtFechaN = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         txtEstado = new javax.swing.JTextField();
         cbxGenero = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
+        btnCancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
 
         jLabel1.setText("Cédula:");
 
@@ -98,7 +98,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Estado Civil:");
 
-        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----Seleccionar----", "Hombre", "Mujer", " " }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Hombre", "Mujer", " " }));
 
         tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +118,13 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblPersonas);
 
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,15 +133,21 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Gestión Persona");
 
         btnCrear.setText("Crear");
@@ -165,13 +178,6 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,43 +188,39 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(157, 157, 157)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(95, 95, 95)
+                                    .addComponent(jLabel8))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel1))
+                                    .addGap(52, 52, 52)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtCedula)
+                                        .addComponent(txtNombre)
+                                        .addComponent(txtApellido)
+                                        .addComponent(txtDireccion)
+                                        .addComponent(txtFecha)
+                                        .addComponent(cbxGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(158, 158, 158)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel1))
-                                        .addGap(52, 52, 52)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtCedula)
-                                            .addComponent(txtNombre)
-                                            .addComponent(txtApellido)
-                                            .addComponent(txtDireccion)
-                                            .addComponent(txtFechaN)
-                                            .addComponent(cbxGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(95, 95, 95)
-                                        .addComponent(jLabel8))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
                                 .addComponent(btnCrear)
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnActualizar)
-                                .addGap(31, 31, 31)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnEliminar)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnListar)
-                                .addGap(47, 47, 47)
-                                .addComponent(btnCancelar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnListar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -245,7 +247,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFechaN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -255,13 +257,12 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
                     .addComponent(btnActualizar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnListar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnListar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -277,18 +278,18 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaN = new Date();
         try {
-            fechaN = formato.parse(txtFechaN.getText().trim());
+            fechaN = formato.parse(txtFecha.getText().trim());
         } catch (ParseException ex) {
             System.out.println(ex);
         }
         Persona persona = new Persona(txtNombre.getText().trim(),txtApellido.getText().trim(),txtCedula.getText().trim(),txtDireccion.getText().trim(),
                 cbxGenero.getSelectedItem().toString().trim(),fechaN,txtEstado.getText().trim(),"Ciudadano");
         if(controlador.crear(persona)){
-          JOptionPane.showMessageDialog(this, "Persona creada exitosamente");
+          JOptionPane.showMessageDialog(this, "Persona creada");
           Limpiar();
           cargarPersonasTbl();
         }else{
-        JOptionPane.showMessageDialog(this, "No se pudo crear a la Persona :ERROR");
+        JOptionPane.showMessageDialog(this, "No se pudo crear a la Persona");
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
@@ -296,7 +297,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaN = new Date();
         try {
-            fechaN = formato.parse(txtFechaN.getText().trim());
+            fechaN = formato.parse(txtFecha.getText().trim());
         } catch (ParseException ex) {
             System.out.println(ex);
         }
@@ -304,11 +305,11 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 cbxGenero.getSelectedItem().toString().trim(),fechaN,txtEstado.getText().trim(),"Ciudadano");  
         
         if(controlador.actualizar(persona)){
-            JOptionPane.showMessageDialog(this, "Persona actualizada exitosamente");
+            JOptionPane.showMessageDialog(this, "Persona actualizada");
            Limpiar();
           cargarPersonasTbl();
         }else{
-        JOptionPane.showMessageDialog(this, "No se pudo actualizar la persona :ERROR");
+        JOptionPane.showMessageDialog(this, "No se pudo actualizar la persona");
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -352,7 +353,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         txtNombre.setText(nombre);
         txtApellido.setText(apellido);
         txtDireccion.setText(direccion);
-        txtFechaN.setText(fechaN);
+        txtFecha.setText(fechaN);
         cbxGenero.setSelectedItem(genero.trim());
         txtEstado.setText(estadoC);
         
@@ -362,7 +363,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtDireccion.setText("");
-        txtFechaN.setText("");
+        txtFecha.setText("");
         cbxGenero.setSelectedIndex(0);
         txtEstado.setText("");
 
@@ -390,7 +391,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtFechaN;
+    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
