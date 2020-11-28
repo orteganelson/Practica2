@@ -8,6 +8,7 @@ package ec.edu.ups.controlador;
 import ec.edu.ups.modelo.Matrimonio;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Usuario

@@ -12,16 +12,19 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
-    
+
     private VentanaPrincipal ventanaPrincipal;
     private ControladorAutoridadCivil controladorAutoridad;
+
+   
+
     /**
      * Creates new form VentanaIniciarSesion
      */
-    public VentanaIniciarSesion() {
+    public VentanaIniciarSesion(VentanaPrincipal ventanaPrincipal,ControladorAutoridadCivil controladorAutoridad ) {
         initComponents();
-        this.ventanaPrincipal=ventanaPrincipal;
-        this.controladorAutoridad=controladorAutoridad;
+       this.ventanaPrincipal=ventanaPrincipal;
+       this.controladorAutoridad= controladorAutoridad;
     }
 
     /**
@@ -35,100 +38,114 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCorreo = new javax.swing.JTextField();
+        btnIniciarS = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        txtPwd = new javax.swing.JPasswordField();
 
-        jLabel1.setText("Correo electrónico:");
+        jLabel1.setText("Correo Electrónico:");
 
         jLabel2.setText("Contraseña:");
 
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtCorreo.setToolTipText("");
+
+        btnIniciarS.setText("Iniciar Sesión");
+        btnIniciarS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIniciarSActionPerformed(evt);
             }
         });
 
         jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
-        jLabel3.setText("Inicio de Sesión");
+        jLabel3.setText("Iniciar Sesión");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 130, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(txtPwd)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(95, 95, 95)
+                        .addComponent(btnIniciarS)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(jLabel3)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(14, 14, 14)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                    .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIniciarS)
+                    .addComponent(jButton2))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnIniciarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSActionPerformed
+        String autoridad = txtCorreo.getText();
+        String contrasenia = "";
+        char[] contrasenia1 = txtPwd.getPassword();
+        for (int i = 0; i < contrasenia1.length; i++) {
+            contrasenia = contrasenia + contrasenia1[i];
+        }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (controladorAutoridad.iniciarSesion(autoridad, contrasenia)) {
+            ventanaPrincipal.getIniciarSesionMenu().setVisible(false);
+            ventanaPrincipal.getCerrarSesionMenu().setVisible(true);
+            ventanaPrincipal.getGestionMenu().setVisible(true);
+            
+            ventanaPrincipal.getSalirMenu().setVisible(false);
+            ventanaPrincipal.getGestionPesonaMenu().setVisible(false);
+            ventanaPrincipal.getGestionMenu().setVisible(true);
 
+            this.dispose();
+            JOptionPane.showMessageDialog(this, "Inicio de sesion exitoso");
+        } else {
+            
+            JOptionPane.showMessageDialog(this, "Usuario o contrasena incorrecta ");
+            Limpiar();
+        }
+    }//GEN-LAST:event_btnIniciarSActionPerformed
+    public void Limpiar() {
+        txtCorreo.setText("");
+        txtPwd.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIniciarS;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JPasswordField txtPwd;
     // End of variables declaration//GEN-END:variables
 }

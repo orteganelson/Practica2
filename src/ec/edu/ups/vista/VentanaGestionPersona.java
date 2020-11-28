@@ -5,19 +5,52 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorPersona;
+import ec.edu.ups.modelo.Persona;
+import ec.edu.ups.modelo.AutoridadCivil;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Optional;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author Usuario
  */
 public class VentanaGestionPersona extends javax.swing.JInternalFrame {
+    private ControladorPersona controlador;
 
     /**
-     * Creates new form VentanaGestionPersona
+     * Creates new form GestionUsuario
      */
-    public VentanaGestionPersona() {
+    public VentanaGestionPersona(ControladorPersona controlador) {
         initComponents();
+        this.controlador = controlador;
     }
 
+    public void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tblPersonas.getModel();
+        modelo.setRowCount(0);
+    }
+
+    public void cargarPersonasTbl() {
+        DefaultTableModel modelo = (DefaultTableModel) tblPersonas.getModel();
+        modelo.setRowCount(0);
+        if(controlador.personas()!=null){
+         for (Iterator it = controlador.personas().iterator(); it.hasNext();) {
+            Persona persona = (Persona) it.next();
+            Object[] rowData = {persona.getCedula(),persona.getNombre(),persona.getApellido(),persona.getDireccion(),persona.getFechaNacimiento().toString(),persona.getGenero(),persona.getEstadoCivil()};
+            modelo.addRow(rowData);
+            tblPersonas.setModel(modelo);
+        }
+        }else{
+            System.out.println("La lista no contiene objetos");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,20 +69,20 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtFechaN = new javax.swing.JTextField();
-        txtGenero = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         cbxGenero = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblGestion = new javax.swing.JTable();
+        tblPersonas = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         jLabel1.setText("Cédula:");
 
@@ -67,7 +100,7 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
 
         cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----Seleccionar----", "Hombre", "Mujer", " " }));
 
-        tblGestion.setModel(new javax.swing.table.DefaultTableModel(
+        tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -78,7 +111,12 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 "Cedula", "Nombre", "Apellido", "Dirección", "FechaNacimiento", "Género", "EstadoCivil"
             }
         ));
-        jScrollPane1.setViewportView(tblGestion);
+        tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPersonasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblPersonas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,15 +137,40 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Gestión Persona");
 
-        jButton1.setText("Crear");
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Listar");
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,26 +200,25 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(txtCedula)
                                             .addComponent(txtNombre)
-                                            .addComponent(jTextField3)
+                                            .addComponent(txtApellido)
                                             .addComponent(txtDireccion)
                                             .addComponent(txtFechaN)
                                             .addComponent(cbxGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(95, 95, 95)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel8))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addComponent(jButton1)
+                                .addComponent(btnCrear)
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton2)
+                                .addComponent(btnActualizar)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton3)
+                                .addComponent(btnEliminar)
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton4)
+                                .addComponent(btnListar)
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton5)))
+                                .addComponent(btnCancelar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -172,13 +234,11 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -194,14 +254,14 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(btnCrear)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnListar)
+                    .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -209,14 +269,112 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaN = new Date();
+        try {
+            fechaN = formato.parse(txtFechaN.getText().trim());
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        Persona persona = new Persona(txtNombre.getText().trim(),txtApellido.getText().trim(),txtCedula.getText().trim(),txtDireccion.getText().trim(),
+                cbxGenero.getSelectedItem().toString().trim(),fechaN,txtEstado.getText().trim(),"Ciudadano");
+        if(controlador.crear(persona)){
+          JOptionPane.showMessageDialog(this, "Persona creada exitosamente");
+          Limpiar();
+          cargarPersonasTbl();
+        }else{
+        JOptionPane.showMessageDialog(this, "No se pudo crear a la Persona :ERROR");
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaN = new Date();
+        try {
+            fechaN = formato.parse(txtFechaN.getText().trim());
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+         Persona persona = new Persona(txtCedula.getText().trim(),txtNombre.getText().trim(),txtApellido.getText().trim(),txtDireccion.getText().trim(),
+                cbxGenero.getSelectedItem().toString().trim(),fechaN,txtEstado.getText().trim(),"Ciudadano");  
+        
+        if(controlador.actualizar(persona)){
+            JOptionPane.showMessageDialog(this, "Persona actualizada exitosamente");
+           Limpiar();
+          cargarPersonasTbl();
+        }else{
+        JOptionPane.showMessageDialog(this, "No se pudo actualizar la persona :ERROR");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int d = JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar la persona con cédula " + txtCedula.getText().trim());
+        if (d == JOptionPane.YES_OPTION) {
+            Persona comparar = new Persona();
+            comparar.setCedula(txtCedula.getText().trim());
+            Optional<Persona> p= controlador.buscar(comparar);
+            Persona persona=p.get();
+            System.out.println(""+persona);
+            
+            if (controlador.eliminar(persona)) {
+                JOptionPane.showMessageDialog(this, "Persona eliminada");
+                 cargarPersonasTbl();
+            } else if (d == JOptionPane.NO_OPTION) {
+                 cargarPersonasTbl();
+            }
+            
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        if(controlador.personas()!=null){
+       cargarPersonasTbl();
+       }
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
+        int index = tblPersonas.getSelectedRow();
+        
+        String cedula = ""+tblPersonas.getValueAt(index, 0);
+        String nombre = "" + tblPersonas.getValueAt(index, 1);
+        String apellido = "" + tblPersonas.getValueAt(index, 2);
+        String direccion = "" + tblPersonas.getValueAt(index, 3);
+        String fechaN = "" + tblPersonas.getValueAt(index, 4);
+        String genero="" + tblPersonas.getValueAt(index, 5);
+        String estadoC="" + tblPersonas.getValueAt(index, 6);
+        
+        txtCedula.setText(cedula);
+        txtNombre.setText(nombre);
+        txtApellido.setText(apellido);
+        txtDireccion.setText(direccion);
+        txtFechaN.setText(fechaN);
+        cbxGenero.setSelectedItem(genero.trim());
+        txtEstado.setText(estadoC);
+        
+    }//GEN-LAST:event_tblPersonasMouseClicked
+     public void Limpiar() {
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtDireccion.setText("");
+        txtFechaN.setText("");
+        cbxGenero.setSelectedIndex(0);
+        txtEstado.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JComboBox<String> cbxGenero;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,12 +385,12 @@ public class VentanaGestionPersona extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable tblGestion;
+    private javax.swing.JTable tblPersonas;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaN;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

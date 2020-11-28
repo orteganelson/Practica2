@@ -5,7 +5,9 @@
  */
 package ec.edu.ups.vista;
 
-import ec.edu.ups.controlador.*;
+import ec.edu.ups.controlador.ControladorAutoridadCivil;
+import ec.edu.ups.controlador.ControladorMatrimonio;
+import ec.edu.ups.controlador.ControladorPersona;
 import javax.swing.JDesktopPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,34 +18,32 @@ import javax.swing.JMenuItem;
  * @author Usuario
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+
     private VentanaIniciarSesion ventanaIniciarSesion;
     private VentanaGestionPersona ventanaGestionPersona;
     private VentanaMatrimonio ventanaMatrimonio;
     private VentanaCrearAutoridad ventanaCrearAutoridad;
     private VentanaGestionAutoridad ventanaGestionAutoridad;
     
-    private controladorPersona controladorPersona;
-    private controladorAutoridadCivil controladorAutoridadCivil;
-    private controladorMatrimonio controladorMatrimonio;
+    private ControladorPersona controladorPersona;
+    private ControladorAutoridadCivil controladorAutoridadCivil;
+    private ControladorMatrimonio controladorMatrimonio;
     
-    /**
-     * Creates new form VentanaPrincipal
-     */
     public VentanaPrincipal() {
         initComponents();
         gestionMenu.setVisible(false);
-        btnCerrarSesionMenu.setVisible(false);
-        controladorPersona= new controladorPersona();
-        controladorAutoridadCivil=new controladorAutoridadCivil();
-        controladorMatrimonio = new controladorMatrimonio();
+        cerrarSesionMenu.setVisible(false);
+        controladorPersona= new ControladorPersona();
+        controladorAutoridadCivil=new ControladorAutoridadCivil();
+        controladorMatrimonio = new ControladorMatrimonio();
         
-        ventanaIniciarSesion = new VentanaIniciarSesion(this,controladorAutoridad);
-        gestionPersona = new VentanaGestionPersona(controladorPersona);
-        matrimonio = new VentanaMatrimonio();
-        gestionAutoridad = new VentanaGestionAutoridad();
-        crearAutoridad = new VentanaCrearAutoridad(controladorAutoridad);
+        ventanaIniciarSesion = new VentanaIniciarSesion(this,controladorAutoridadCivil);
+        ventanaGestionPersona = new VentanaGestionPersona(controladorPersona);
+     /*   ventanaMatrimonio = new VentanaMatrimonio();
+        ventanaGestionAutoridad = new VentanaGestionAutoridad();*/
+        ventanaCrearAutoridad = new VentanaCrearAutoridad(controladorAutoridadCivil);
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,111 +53,160 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        desktopPane = new javax.swing.JDesktopPane();
+        menuBar = new javax.swing.JMenuBar();
+        inicioMenu = new javax.swing.JMenu();
+        crearAutoridadMenu = new javax.swing.JMenuItem();
+        iniciarSesionMenu = new javax.swing.JMenuItem();
+        cerrarSesionMenu = new javax.swing.JMenuItem();
+        salirMenu = new javax.swing.JMenuItem();
+        gestionMenu = new javax.swing.JMenu();
+        gestionPesonaMenu = new javax.swing.JMenuItem();
+        gestionAutoridadMenu = new javax.swing.JMenuItem();
+        matrimonioMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
+        desktopPane.setLayout(desktopPaneLayout);
+        desktopPaneLayout.setHorizontalGroup(
+            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+        desktopPaneLayout.setVerticalGroup(
+            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 257, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Menu");
+        inicioMenu.setMnemonic('f');
+        inicioMenu.setText("Inicio");
 
-        jMenuItem1.setText("Crear Autoridad");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Iniciar Sesion");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Cerrar Sesion");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        crearAutoridadMenu.setMnemonic('o');
+        crearAutoridadMenu.setText("Crear Autoridad");
+        crearAutoridadMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                crearAutoridadMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        inicioMenu.add(crearAutoridadMenu);
 
-        jMenuItem4.setText("Salir");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        iniciarSesionMenu.setMnemonic('s');
+        iniciarSesionMenu.setText("Iniciar Sesión");
+        iniciarSesionMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                iniciarSesionMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        inicioMenu.add(iniciarSesionMenu);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Gestión");
-
-        jMenuItem5.setText("Matrimonio");
-        jMenu2.add(jMenuItem5);
-
-        jMenuItem6.setText("Ingresar Persona");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        cerrarSesionMenu.setMnemonic('a');
+        cerrarSesionMenu.setText("Cerrar Sesión");
+        cerrarSesionMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                cerrarSesionMenuActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem6);
+        inicioMenu.add(cerrarSesionMenu);
 
-        jMenuItem7.setText("Gestionar Persona");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        salirMenu.setMnemonic('x');
+        salirMenu.setText("Salir");
+        salirMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                salirMenuActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem7);
+        inicioMenu.add(salirMenu);
 
-        jMenuBar1.add(jMenu2);
+        menuBar.add(inicioMenu);
 
-        setJMenuBar(jMenuBar1);
+        gestionMenu.setMnemonic('e');
+        gestionMenu.setText("Gestión");
+
+        gestionPesonaMenu.setMnemonic('t');
+        gestionPesonaMenu.setText("Gestionar Persona");
+        gestionPesonaMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionPesonaMenuActionPerformed(evt);
+            }
+        });
+        gestionMenu.add(gestionPesonaMenu);
+
+        gestionAutoridadMenu.setMnemonic('y');
+        gestionAutoridadMenu.setText("Gestionar Autoridad");
+        gestionAutoridadMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionAutoridadMenuActionPerformed(evt);
+            }
+        });
+        gestionMenu.add(gestionAutoridadMenu);
+
+        matrimonioMenu.setMnemonic('p');
+        matrimonioMenu.setText("Acta de Matrimonio");
+        matrimonioMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                matrimonioMenuActionPerformed(evt);
+            }
+        });
+        gestionMenu.add(matrimonioMenu);
+
+        menuBar.add(gestionMenu);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(desktopPane)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(desktopPane)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void salirMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_salirMenuActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    private void crearAutoridadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearAutoridadMenuActionPerformed
+        desktopPane.add(ventanaCrearAutoridad);
+        ventanaCrearAutoridad.setVisible(true);
+    }//GEN-LAST:event_crearAutoridadMenuActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void iniciarSesionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionMenuActionPerformed
+        desktopPane.add(ventanaIniciarSesion);
+        ventanaIniciarSesion.setVisible(true);
+    }//GEN-LAST:event_iniciarSesionMenuActionPerformed
+
+    private void cerrarSesionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionMenuActionPerformed
+        iniciarSesionMenu.setVisible(true);
+        crearAutoridadMenu.setVisible(true);
+        gestionMenu.setVisible(false);
+        salirMenu.setVisible(true);
+    }//GEN-LAST:event_cerrarSesionMenuActionPerformed
+
+    private void gestionPesonaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionPesonaMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_gestionPesonaMenuActionPerformed
+
+    private void gestionAutoridadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionAutoridadMenuActionPerformed
+        desktopPane.add(ventanaGestionPersona);
+        ventanaGestionPersona.setVisible(true);
+    }//GEN-LAST:event_gestionAutoridadMenuActionPerformed
+
+    private void matrimonioMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matrimonioMenuActionPerformed
+        desktopPane.add(ventanaMatrimonio);
+       ventanaMatrimonio.setVisible(true);
+    }//GEN-LAST:event_matrimonioMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +234,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -194,17 +244,91 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
 
+    public JMenuItem getCerrarSesionMenu() {
+        return cerrarSesionMenu;
+    }
+
+    public void setCerrarSesionMenu(JMenuItem cerrarSesionMenu) {
+        this.cerrarSesionMenu = cerrarSesionMenu;
+    }
+
+    public JMenuItem getCrearAutoridadMenu() {
+        return crearAutoridadMenu;
+    }
+
+    public void setCrearAutoridadMenu(JMenuItem crearAutoridadMenu) {
+        this.crearAutoridadMenu = crearAutoridadMenu;
+    }
+
+    public JMenuItem getGestionAutoridadMenu() {
+        return gestionAutoridadMenu;
+    }
+
+    public void setGestionAutoridadMenu(JMenuItem gestionAutoridadMenu) {
+        this.gestionAutoridadMenu = gestionAutoridadMenu;
+    }
+
+    public JMenu getGestionMenu() {
+        return gestionMenu;
+    }
+
+    public void setGestionMenu(JMenu gestionMenu) {
+        this.gestionMenu = gestionMenu;
+    }
+
+    public JMenuItem getGestionPesonaMenu() {
+        return gestionPesonaMenu;
+    }
+
+    public void setGestionPesonaMenu(JMenuItem gestionPesonaMenu) {
+        this.gestionPesonaMenu = gestionPesonaMenu;
+    }
+
+    public JMenuItem getIniciarSesionMenu() {
+        return iniciarSesionMenu;
+    }
+
+    public void setIniciarSesionMenu(JMenuItem iniciarSesionMenu) {
+        this.iniciarSesionMenu = iniciarSesionMenu;
+    }
+
+    public JMenu getInicioMenu() {
+        return inicioMenu;
+    }
+
+    public void setInicioMenu(JMenu inicioMenu) {
+        this.inicioMenu = inicioMenu;
+    }
+
+    public JMenuItem getMatrimonioMenu() {
+        return matrimonioMenu;
+    }
+
+    public void setMatrimonioMenu(JMenuItem matrimonioMenu) {
+        this.matrimonioMenu = matrimonioMenu;
+    }
+
+    public JMenuItem getSalirMenu() {
+        return salirMenu;
+    }
+
+    public void setSalirMenu(JMenuItem salirMenu) {
+        this.salirMenu = salirMenu;
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem cerrarSesionMenu;
+    private javax.swing.JMenuItem crearAutoridadMenu;
+    private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenuItem gestionAutoridadMenu;
+    private javax.swing.JMenu gestionMenu;
+    private javax.swing.JMenuItem gestionPesonaMenu;
+    private javax.swing.JMenuItem iniciarSesionMenu;
+    private javax.swing.JMenu inicioMenu;
+    private javax.swing.JMenuItem matrimonioMenu;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem salirMenu;
     // End of variables declaration//GEN-END:variables
+
 }

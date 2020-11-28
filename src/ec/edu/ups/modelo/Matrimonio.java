@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class Matrimonio {
+public class Matrimonio{
     private int codigo;
     private Date fecha;
     private String lugar;
@@ -21,9 +21,21 @@ public class Matrimonio {
     private Persona testigo1;
     private Persona testigo2;
     private Persona autoridad;
-    
+
     public Matrimonio() {
     }
+
+    public Matrimonio(int codigo, Date fecha, String lugar, Persona contrayente1, Persona contrayente2, Persona testigo1, Persona testigo2, Persona autoridad) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.contrayente1 = contrayente1;
+        this.contrayente2 = contrayente2;
+        this.testigo1 = testigo1;
+        this.testigo2 = testigo2;
+        this.autoridad = autoridad;
+    }
+    
 
     public int getCodigo() {
         return codigo;

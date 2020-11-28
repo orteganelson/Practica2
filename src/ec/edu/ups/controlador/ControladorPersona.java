@@ -6,6 +6,9 @@
 package ec.edu.ups.controlador;
 
 import ec.edu.ups.modelo.Persona;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 /**
  *
  * @author Usuario
@@ -56,6 +59,19 @@ public class ControladorPersona extends Controlador<Persona>{
     public int generarId() {
         return 0;
        
+    }
+    public List<Persona> personas() {
+
+        List<Persona> listaP = new ArrayList();
+        Persona persona;
+        Iterator i = super.getLista().iterator();
+        while (i.hasNext()) {
+            persona = (Persona) i.next();
+            listaP.add(persona);
+
+        }
+        return listaP;
+
     }
     
 }
