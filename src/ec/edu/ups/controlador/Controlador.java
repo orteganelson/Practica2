@@ -15,25 +15,25 @@ import java.util.Optional;
  * @author Usuario
  */
 public abstract class Controlador<E>{
-    private List<E> listaGenerica;
+    private List<E> listaG;
 
     public Controlador() {
     }
     
-    public Controlador(List<E> listaGenerica) {
-        this.listaGenerica = listaGenerica;
+    public Controlador(List<E> listaG) {
+        this.listaG = listaG;
     }
-    public List<E> getListaGenerica() {
-        return listaGenerica;
+    public List<E> getListaG() {
+        return listaG;
     }
 
-    public void setListaGenerica(List<E> listaGenerica) {
-        this.listaGenerica = listaGenerica;
+    public void setListaG(List<E> listaG) {
+        this.listaG = listaG;
     }
     public boolean crear(E objeto) {
 
         if (validar(objeto) == true) {
-            return listaGenerica.add(objeto);
+            return listaG.add(objeto);
         }
         return false;
 
@@ -43,13 +43,13 @@ public abstract class Controlador<E>{
     public abstract int generarId();
 
     public Optional<E> buscar(E comparar) {
-        return listaGenerica.stream().filter(objeto -> objeto.equals(comparar)).findFirst();
+        return listaG.stream().filter(objeto -> objeto.equals(comparar)).findFirst();
 
     }
 
     public int posicion(E objetoC) {
-        for (int i = 0; i < listaGenerica.size() ; i++) {
-            E objetoL = listaGenerica.get(i);
+        for (int i = 0; i < listaG.size() ; i++) {
+            E objetoL = listaG.get(i);
             if (objetoL.equals(objetoC)) {
                 return i;
             }
@@ -63,7 +63,7 @@ public abstract class Controlador<E>{
         E objetoE = buscar.get();
         if (objetoE != null) {
             System.out.println("Verdadero");
-            return listaGenerica.remove(objetoE);
+            return listaG.remove(objetoE);
 
         }
         System.out.println("Falso");
@@ -74,7 +74,7 @@ public abstract class Controlador<E>{
     public boolean actualizar(E objetoA) {
         int pos = posicion(objetoA);
         if (pos >=0) {
-            listaGenerica.set(pos, objetoA);
+            listaG.set(pos, objetoA);
             System.out.println("True");
             return true;
 
@@ -87,19 +87,19 @@ public abstract class Controlador<E>{
     public void cargarDatos(String ruta)throws FileNotFoundException, IOException, ClassNotFoundException{
         FileInputStream archivo = new FileInputStream(ruta);
         ObjectInputStream datos = new ObjectInputStream(archivo);
-        listaGenerica= (List<E>) datos.readObject();
+        listaG= (List<E>) datos.readObject();
     }
     public void guardarDatos(String ruta)throws FileNotFoundException, IOException, ClassNotFoundException{
         FileOutputStream archivo= new FileOutputStream(ruta);
         ObjectOutputStream datos = new ObjectOutputStream(archivo);
-        datos.writeObject(listaGenerica);
+        datos.writeObject(listaG);
     }
     public List<E> getLista() {
-        return listaGenerica;
+        return listaG;
     }
 
     public void setLista(List<E> lista) {
-        this.listaGenerica= lista;
+        this.listaG= lista;
     }
     
 }

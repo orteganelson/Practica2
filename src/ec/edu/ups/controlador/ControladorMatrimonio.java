@@ -17,28 +17,27 @@ public class ControladorMatrimonio extends Controlador<Matrimonio> {
 
     @Override
     public boolean validar(Matrimonio objeto) {
-        if(objeto.getContrayente1().getTipo().equals("Contrayente: ")&& objeto.getContrayente2().getTipo().equals("Contrayente: ")){
-            if(objeto.getContrayente1().getEstadoCivil()!="Casado"&& objeto.getContrayente2().getEstadoCivil()!="Casado"){
+        if(objeto.getContrayente1().getTipo().equals("Contrayente: ")&&
+                objeto.getContrayente2().getTipo().equals("Contrayente: ")){
+            if(objeto.getContrayente1().getEstadoCivil()!="Casado"&& 
+                    objeto.getContrayente2().getEstadoCivil()!="Casado"){
             return true;
-            }
-        
-        }
-        
-        return false;
-       
+            }        
+        }        
+        return false;       
     }
 
     @Override
     public int generarId() {
-         List<Matrimonio> temp = new ArrayList();
-        for ( Matrimonio matrimonio : super.getListaGenerica()) {
+         List<Matrimonio> tm = new ArrayList();
+        for ( Matrimonio matrimonio : super.getListaG()) {
             Matrimonio m = (Matrimonio) matrimonio;
-            temp.add(m);
+            tm.add(m);
 
         }
 
-        if (temp.size() > 0 && temp != null) {
-            return temp.get(temp.size() - 1).getCodigo() + 1;
+        if (tm.size() > 0 && tm != null) {
+            return tm.get(tm.size() - 1).getCodigo() + 1;
         } else {
             return 1;
         }       

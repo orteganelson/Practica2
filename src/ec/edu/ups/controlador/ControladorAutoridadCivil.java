@@ -27,7 +27,7 @@ public class ControladorAutoridadCivil extends Controlador<AutoridadCivil> {
     }
      public boolean iniciarSesion(String correo, String contrasenia) {
 
-        for (AutoridadCivil usuario : super.getListaGenerica()) {
+        for (AutoridadCivil usuario : super.getListaG()) {
             AutoridadCivil u = (AutoridadCivil) usuario;
             if (u.getCorreo().equals(correo) && u.getContrasenia().equals(contrasenia)) {
                 this.autoridadCivil = u;
